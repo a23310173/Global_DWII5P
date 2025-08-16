@@ -1,0 +1,504 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap');
+
+body {
+
+}/* ----- Reset mínimo ----- */
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+
+/* ----- Video de fondo ----- */
+#myVideo {
+    position: fixed;
+    inset: 0;                 /* top:0; right:0; bottom:0; left:0 */
+    width: 100%;
+    height: 100%;
+    object-fit: cover;        /* recorta para cubrir toda la pantalla */
+    z-index: -1;              /* debajo de todo el contenido */
+    pointer-events: none;     /* no bloquea clics */
+    filter: brightness(0.6);  /* oscurece un poco para legibilidad (ajusta al gusto) */
+    background: #000;         /* fallback si el video tarda en cargar */
+}
+
+/* (Opcional) Capa de oscurecimiento extra.
+   Si quieres más contraste, agrega <div class="bg-overlay"></div> justo después del <video> en el HTML. */
+.bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.35);
+    z-index: 0;
+}
+
+/* ----- Coloca todo el contenido por encima del video ----- */
+header, main, footer {
+    position: relative;
+    z-index: 1;
+    color: #fff;              /* texto legible sobre el video oscuro */
+}
+
+/* ----- Tipografía base para PC ----- */
+body {
+    font-family: system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.4;
+}
+
+/* ----- Contenedor de header (solo estructura, sin estilos visuales aún) ----- */
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* izq: logo, centro: título, der: menú (lo ajustaremos luego) */
+    gap: 16px;
+    padding: 16px 24px;
+}
+
+/* Evita que el video “salte” por scroll en algunos navegadores */
+body { overflow-x: hidden; }
+
+
+
+/* ----- Estilos de header (logo, título, menú) ----- */
+.header-container {
+    background: #739CF4;
+    opacity: 80%;
+    display: grid;
+    grid-template-columns: auto 1fr auto; /* logo | título | menú */
+    align-items: center;
+    column-gap: 24px;
+    padding: 12px 24px;
+    height: 100px;
+}
+
+/* Logo a la izquierda con esquinas redondeadas 19px */
+.logo img {
+    display: block;
+    border-radius: 19px;
+    max-height: 80px; /* ajusta si necesitas más/menos alto */
+    height: auto;
+}
+
+/* Título centrado, Poppins negro Bold 24 */
+.site-title {
+    margin: 0;
+    justify-self: center;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 24px;
+    font-weight: 700; /* Bold */
+    color: #000;      /* negro */
+}
+
+/* Menú a la derecha, Poppins normal 18 */
+.menu ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.menu a {
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 18px;     /* normal 18 */
+    font-weight: 400;    /* normal */
+    color: #000;         /* negro */
+    text-decoration: none;
+    padding: 8px 10px;
+    border-radius: 8px;
+    transition: color .2s ease;
+}
+
+/* Hover gris en los links del menú */
+.menu a:hover,
+.menu a:focus {
+    color: #6b6b6b; /* gris */
+}
+
+
+/* === Claim centrado, fondo gris 50%, borde 15 === */
+.claim {
+    width: fit-content;
+    max-width: min(90vw, 900px);
+    margin: 40px auto 8vh;                 /* separación superior de 20px respecto al header */
+    padding: 20px 50px;                    /* top/bottom 20px, left/right 50px */
+    background: rgba(217, 217, 217, 0.5);  /* D9D9D9 al 50% */
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    will-change: transform;
+    transition: transform .25s ease, background-color .2s ease, background .2s ease;
+}
+
+.claim:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(217, 217, 217, 0.8);  /* mantiene el gris y sube opacidad a 80% */
+}
+
+/* Texto interno se mantiene igual */
+.claim h2 {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+}
+
+/* Efecto “burbuja” conservado */
+.claim::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 240%;
+    height: 240%;
+    background:
+            radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.55) 0%,
+            rgba(255,255,255,0.25) 20%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0) 60%);
+    transform: translate(-20%, -20%) scale(0.6);
+    opacity: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    transition: transform .8s ease, opacity .6s ease;
+}
+
+.claim:hover::before {
+    transform: translate(10%, 10%) scale(1.05);
+    opacity: .9;
+}
+
+
+/* === Sobre nosotros === */
+.sobre-nosotros {
+    width: fit-content;
+    max-width: min(90vw, 900px);
+    margin: 20px auto 8vh;                  /* separación superior 20px */
+    padding: 20px 50px;                      /* top/bottom 20px, left/right 50px */
+    background: rgba(217, 217, 217, 0.5);    /* D9D9D9 al 50% */
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    will-change: transform;
+    transition: transform .25s ease, background .2s ease;
+}
+
+.sobre-nosotros:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(217, 217, 217, 0.8);   /* opacidad 80% al hover */
+}
+
+/* Título y texto en Poppins */
+.sobre-nosotros h2 {
+    margin: 0 0 10px 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 700;        /* Bold */
+    font-size: 28px;         /* si lo quieres igual a 36, me dices y lo subo */
+    color: #000;
+    text-align: center;
+}
+
+.sobre-nosotros p {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #000;
+    text-align: center;
+}
+
+/* Efecto “burbuja”*/
+.sobre-nosotros::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 240%;
+    height: 240%;
+    background:
+            radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.55) 0%,
+            rgba(255,255,255,0.25) 20%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0) 60%);
+    transform: translate(-20%, -20%) scale(0.6);
+    opacity: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    transition: transform .8s ease, opacity .6s ease;
+}
+
+.sobre-nosotros:hover::before {
+    transform: translate(10%, 10%) scale(1.05);
+    opacity: .9;
+}
+
+
+/* === Carrusel (contenedor similar a claim/sobre-nosotros) === */
+.carrusel-servicios {
+    width: fit-content;
+    max-width: min(90vw, 1000px);
+    margin: 20px auto 8vh;
+    padding: 20px 50px;
+    background: rgba(217, 217, 217, 0.5);  /* D9D9D9 50% */
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    will-change: transform;
+    transition: transform .25s ease, background .2s ease;
+}
+
+.carrusel-servicios:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(217, 217, 217, 0.8);  /* 80% al hover */
+}
+
+/* Título del carrusel */
+.carrusel-servicios h2 {
+    margin: 0 0 16px 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 700;
+    font-size: 28px;
+    color: #000;
+    text-align: center;
+}
+
+/* Efecto “burbuja” como en las otras secciones */
+.carrusel-servicios::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 240%;
+    height: 240%;
+    background:
+            radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.55) 0%,
+            rgba(255,255,255,0.25) 20%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0) 60%);
+    transform: translate(-20%, -20%) scale(0.6);
+    opacity: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    transition: transform .8s ease, opacity .6s ease;
+}
+
+.carrusel-servicios:hover::before {
+    transform: translate(10%, 10%) scale(1.05);
+    opacity: .9;
+}
+
+/* === Estructura del carrusel === */
+.carrusel {
+    position: relative;
+    z-index: 1;
+}
+
+.carrusel-ventana {
+    height: 720px;       /* forzamos la ventana a 100px */
+    max-height: 720px;
+    overflow: hidden;
+    border-radius: 12px;
+}
+
+.carrusel-track {
+    display: flex;
+    transition: transform .4s ease;
+    will-change: transform;
+}
+
+.carrusel-item {
+    flex: 0 0 100%;
+    display: block;           /* permite que el <a> se comporte como bloque */
+}
+
+.carrusel-item img {
+    width: 100%;
+    height: 100%;
+    max-height: 720px; /* forzamos la imagen a 100px
+    display: block; /* proporción cómoda en PC */
+    object-fit: cover;
+    border-radius: 12px;
+    object-position: center;
+}
+
+/* Botones prev/next */
+.carrusel-prev,
+.carrusel-next {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border: none;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.55);
+    color: #fff;
+    display: grid;
+    place-items: center;
+    cursor: pointer;
+    z-index: 2;
+    backdrop-filter: blur(4px);
+    transition: background .2s ease, transform .2s ease;
+}
+
+.carrusel-prev { left: 8px; }
+.carrusel-next { right: 8px; }
+
+.carrusel-prev:hover,
+.carrusel-next:hover {
+    background: rgba(0,0,0,0.75);
+    transform: translateY(-50%) scale(1.05);
+}
+
+.carrusel-prev:focus-visible,
+.carrusel-next:focus-visible,
+.carrusel-dot:focus-visible {
+    outline: 2px solid #739CF4;
+    outline-offset: 2px;
+}
+
+/* Indicadores (puntos) */
+.carrusel-indicadores {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+.carrusel-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 999px;
+    background: rgba(0,0,0,0.5);
+    border: none;
+    cursor: pointer;
+    transition: width .2s ease, background .2s ease;
+}
+
+.carrusel-dot.activo {
+    width: 24px;
+    background: #000;
+}
+
+
+/* === Footer (PC) === */
+footer {
+    position: relative;
+    z-index: 1;
+    background: rgba(217, 217, 217, 0.25); /* D9D9D9 @ 25% */
+    padding: 16px 24px;
+    backdrop-filter: blur(2px);
+    border-radius: 15px; /* opcional, coherente con el diseño */
+}
+
+.footer-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;   /* centra el bloque de redes + texto como grupo */
+    gap: 16px 24px;
+    flex-wrap: wrap;
+}
+
+.footer-contacto {
+    display: flex;
+    align-items: center;
+    justify-content: center;   /* íconos centrados */
+    gap: 16px;
+}
+
+.footer-contacto a img {
+    width: 32px;
+    height: 32px;
+    display: block;
+    border-radius: 8px;
+    transition: transform .2s ease, opacity .2s ease;
+}
+
+.footer-contacto a:hover img,
+.footer-contacto a:focus img {
+    transform: scale(1.06);
+    opacity: 0.9;
+}
+
+.footer-texto {
+    margin-left: 12px; /* “a un lado” de las redes */
+}
+
+.footer-texto p {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #000; /* sobre el fondo claro */
+}
+
+/* Ajustes sutiles en pantallas grandes */
+@media (min-width: 992px) {
+    .footer-container { gap: 24px 32px; }
+    .footer-texto { margin-left: 16px; }
+}
+
+
+
+/* --- Soporte hamburguesa en colapso por zoom --- */
+.header-container { position: relative; }
+
+/* Botón hamburguesa (oculto por defecto) */
+.hamburger {
+    position: absolute;
+    right: 24px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: none;                 /* visible solo en modo colapsado */
+    width: 40px; height: 40px;
+    border: none;
+    background: rgba(0,0,0,0.08);
+    color: #000;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 22px;
+    line-height: 1;
+    transition: background .2s ease, transform .2s ease;
+}
+.hamburger:hover { background: rgba(0,0,0,0.15); transform: translateY(-50%) scale(1.04); }
+.hamburger:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
+
+/* En modo colapsado: ocultamos el menú horizontal y mostramos la hamburguesa */
+body.nav-collapsed .menu { display: none; }
+body.nav-collapsed .hamburger { display: inline-flex; align-items: center; justify-content: center; }
+
+/* Menú desplegable cuando está abierto */
+body.nav-collapsed.nav-open .menu {
+    display: block;
+    position: absolute;
+    top: calc(100% + 8px);
+    right: 16px;
+    background: rgba(217, 217, 217, 0.95); /* D9D9D9 casi sólido */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    padding: 12px;
+    z-index: 10;
+}
+
+/* En el desplegable, la lista va en columna */
+body.nav-collapsed.nav-open .menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0; padding: 0;
+}
+
+body.nav-collapsed.nav-open .menu a {
+    display: block;
+    padding: 8px 10px;
+    border-radius: 8px;
+}
+body.nav-collapsed.nav-open .menu a:hover { background: rgba(0,0,0,0.08); }

@@ -1,0 +1,133 @@
+/* =========================
+   servicios.css — OZC Tech
+   Estilos específicos de la página de Servicios (PC)
+   Mantiene el look de style.css (gris 50%, hover 80%, borde 15)
+   ========================= */
+
+/* Contenedor de título/hero (similar a .claim) */
+.page-hero {
+    width: fit-content;
+    max-width: min(90vw, 1000px);
+    margin: 20px auto 24px;
+    padding: 20px 50px;
+    background: rgba(217, 217, 217, 0.5);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: transform .25s ease, background .2s ease;
+}
+
+.page-hero:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(217, 217, 217, 0.8);
+}
+
+.page-hero::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 240%;
+    height: 240%;
+    background:
+            radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.55) 0%,
+            rgba(255,255,255,0.25) 20%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0) 60%);
+    transform: translate(-20%, -20%) scale(0.6);
+    opacity: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    transition: transform .8s ease, opacity .6s ease;
+}
+.page-hero:hover::before {
+    transform: translate(10%, 10%) scale(1.05);
+    opacity: .9;
+}
+
+.page-hero h2 {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+}
+
+/* Tarjetas de servicio (similar a .sobre-nosotros) */
+.servicio-card {
+    width: fit-content;
+    max-width: min(92vw, 1000px);
+    margin: 20px auto;
+    padding: 20px 50px;
+    background: rgba(217, 217, 217, 0.5);
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    transition: transform .25s ease, background .2s ease;
+}
+.servicio-card:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(217, 217, 217, 0.8);
+}
+.servicio-card::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 240%;
+    height: 240%;
+    background:
+            radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.55) 0%,
+            rgba(255,255,255,0.25) 20%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0) 60%);
+    transform: translate(-20%, -20%) scale(0.6);
+    opacity: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    transition: transform .8s ease, opacity .6s ease;
+}
+.servicio-card:hover::before {
+    transform: translate(10%, 10%) scale(1.05);
+    opacity: .9;
+}
+
+/* Tipografía y contenido interno */
+.servicio-card h3 {
+    margin: 0 0 10px 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #000;
+    text-align: center;
+}
+
+.servicio-card p {
+    margin: 0 0 12px 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 1.6;
+    color: #000;
+    text-align: center;
+}
+
+/* Lista de servicios */
+.lista-servicios {
+    margin: 0 auto;
+    padding-left: 18px;    /* viñetas visibles */
+    max-width: 720px;
+    color: #000;
+}
+.lista-servicios li {
+    margin: 6px 0;
+    font-size: 17px;
+    line-height: 1.5;
+}

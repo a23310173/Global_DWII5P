@@ -3,8 +3,112 @@
 <head>
     <meta charset="UTF-8">
     <title>OZC Tech</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../CSS/style.css">
 </head>
 <body>
+<video autoplay muted loop id="myVideo" playsinline>
+    <source src="../img/tech.mp4" type="video/mp4">
+</video>
+
+<header>
+    <div class="header-container">
+        <!-- Logo -->
+        <div class="logo">
+            <img src="../img/logo.png" alt="OZC Tech Logo">
+        </div>
+
+        <!-- Título -->
+        <h1 class="site-title">OZC Tech</h1>
+
+        <!-- Menú -->
+        <nav class="menu">
+            <ul>
+                <li><a href="../PHP/login.php">LOGIN</a></li>
+                <li><a href="../PHP/register.php">REGISTER</a></li>
+                <li><a href="servicios.html">SERVICIOS</a></li>
+                <li><a href="contacto.html">CONTACTO</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main id="inicio">
+    <!-- Claim -->
+    <div class="claim">
+        <h2>MAS QUE SISTEMAS, SOLUCIONES.</h2>
+    </div>
+
+    <!-- Sobre nosotros -->
+    <section class="sobre-nosotros" id="sobre-nosotros" aria-labelledby="titulo-sobre">
+        <h2 id="titulo-sobre">Sobre nosotros</h2>
+        <p>
+            Somos una empresa dedicada a brindar soluciones tecnológicas innovadoras para impulsar el crecimiento de tu negocio.
+            Nos especializamos en desarrollo web, mantenimiento de dispositivos y optimización de redes.
+        </p>
+    </section>
+
+    <!-- Carrusel (3 imágenes que llevan a servicios.html) -->
+    <section class="carrusel-servicios" aria-labelledby="titulo-carrusel">
+        <h2 id="titulo-carrusel">Explora nuestros servicios</h2>
+
+        <div class="carrusel" id="carrusel-servicios">
+            <button class="carrusel-prev" aria-label="Anterior">&#10094;</button>
+
+            <div class="carrusel-ventana" tabindex="0" aria-roledescription="carousel">
+                <div class="carrusel-track">
+                    <a class="carrusel-item" href="servicios.html">
+                        <img src="../img/progra.jpg" alt="Servicio desarrollo web">
+                    </a>
+                    <a class="carrusel-item" href="servicios.html">
+                        <img src="../img/server.jpg" alt="Servicio mantenimiento y optimización">
+                    </a>
+                    <a class="carrusel-item" href="servicios.html">
+                        <img src="../img/cpu.jpg" alt="Servicio redes y virtualización">
+                    </a>
+                </div>
+            </div>
+
+            <button class="carrusel-next" aria-label="Siguiente">&#10095;</button>
+
+            <div class="carrusel-indicadores" aria-label="Posición del carrusel"></div>
+        </div>
+
+        <noscript>
+            <p><a href="servicios.html">Ver servicios</a></p>
+        </noscript>
+    </section>
+</main>
+
+<footer>
+    <div class="footer-container">
+        <!-- Redes/Contacto -->
+        <div class="footer-contacto">
+            <a href="https://www.facebook.com/tuperfil" target="_blank" rel="noopener">
+                <img src="../img/facebook.png" alt="Facebook">
+            </a>
+            <a href="https://wa.me/521XXXXXXXXXX" target="_blank" rel="noopener">
+                <img src="../img/whatsapp.png" alt="WhatsApp">
+            </a>
+            <a href="mailto:tucorreo@gmail.com">
+                <img src="../img/gmail.png" alt="Gmail">
+            </a>
+        </div>
+
+        <!-- Texto -->
+        <div class="footer-texto">
+            <p>OZC Tech &copy; since 2025</p>
+        </div>
+    </div>
+</footer>
+
 
 </body>
+<!-- Script para detectar si es dispositivo movil o PC -->
+<script src="../JS/mobile.js" defer></script>
+<!-- Script para el carrusel -->
+<script src="../JS/carrusel.js" defer></script>
+<!-- Script para el header y menú -->
+<script src="../JS/header-nav.js" defer></script>
+
 </html>

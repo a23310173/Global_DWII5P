@@ -1,0 +1,8 @@
+# Desactivar negociaciones raras de URL
+Options -MultiViews
+
+# Evitar listado de directorios
+Options -Indexes
+
+# Enviar todos los 404 a nuestro script
+ErrorDocument 404 /PHP/404.php
