@@ -12,7 +12,7 @@ declare(strict_types=1);
 error_log(sprintf('[404] %s %s', $_SERVER['REQUEST_METHOD'] ?? 'GET', $_SERVER['REQUEST_URI'] ?? '-'));
 
 // Redirección inmediata a la página inicial
-header('Location: ../src/index.html', true, 302);
+header('Location: ../index.html', true, 302);
 exit;
 
 /* Fallback (si headers ya fueron enviados)
