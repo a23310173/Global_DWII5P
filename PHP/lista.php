@@ -71,6 +71,29 @@ $clientes = run('SELECT idC, nameC, emailC, telC, imageC FROM clientes ORDER BY 
             .menu ul{ gap:6px; flex-wrap:wrap }
             th, td{ padding:8px 10px }
         }
+
+        @media (max-width: 600px) {
+            .table-wrap, table, thead, tbody, th, td, tr {
+                display: block;
+                width: 100%;
+            }
+            thead { display: none; }
+            tr { margin-bottom: 18px; background: #fff; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+            td {
+                padding: 10px 12px;
+                border: none;
+                position: relative;
+            }
+            td:before {
+                content: attr(data-label);
+                font-weight: bold;
+                display: block;
+                margin-bottom: 4px;
+                color: #739CF4;
+            }
+            .acciones { flex-direction: column; gap: 6px; }
+        }
+
     </style>
 </head>
 <body>

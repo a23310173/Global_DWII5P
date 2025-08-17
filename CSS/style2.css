@@ -467,6 +467,7 @@ footer {
     font-size: 22px;
     line-height: 1;
     transition: background .2s ease, transform .2s ease;
+    z-index: 9999; /* por encima del menú */
 }
 .hamburger:hover { background: rgba(0,0,0,0.15); transform: translateY(-50%) scale(1.04); }
 .hamburger:focus-visible { outline: 2px solid #000; outline-offset: 2px; }
@@ -485,7 +486,7 @@ body.nav-collapsed.nav-open .menu {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     padding: 12px;
-    z-index: 10;
+    z-index: 9999; /* por encima de todo */
 }
 
 /* En el desplegable, la lista va en columna */
@@ -502,3 +503,76 @@ body.nav-collapsed.nav-open .menu a {
     border-radius: 8px;
 }
 body.nav-collapsed.nav-open .menu a:hover { background: rgba(0,0,0,0.08); }
+
+/* Asegura que el header y el menú hamburguesa estén por encima de overlays */
+header, .header-container, .menu, .hamburger {
+    z-index: 10000 !important;
+    position: relative;
+}
+
+/* =============Clase indicaciones ================ */
+.indicaciones {
+    width: fit-content;
+    max-width: min(90vw, 900px);
+    margin: 20px auto 8vh;                  /* separación superior 20px */
+    padding: 20px 50px;                      /* top/bottom 20px, left/right 50px */
+    background: rgba(217, 217, 217, 0.5);    /* D9D9D9 al 50% */
+    border-radius: 15px;
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    will-change: transform;
+    transition: transform .25s ease, background .2s ease;
+}
+
+.indicaciones:hover {
+    transform: translateY(-2px) scale(1.01);
+    background: rgba(217, 217, 217, 0.8);   /* opacidad 80% al hover */
+}
+
+/* Título y texto en Poppins */
+.indicaciones h2 {
+    margin: 0 0 10px 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 700;        /* Bold */
+    font-size: 28px;         /* si lo quieres igual a 36, me dices y lo subo */
+    color: #000;
+    text-align: center;
+}
+.indicaciones p {
+    margin: 0;
+    font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    color: #000;
+    text-align: center;
+}
+
+/* Efecto “burbuja”*/
+.indicaciones::before {
+    content: "";
+    position: absolute;
+    top: -120%;
+    left: -120%;
+    width: 240%;
+    height: 240%;
+    background:
+            radial-gradient(circle at 30% 30%,
+            rgba(255,255,255,0.55) 0%,
+            rgba(255,255,255,0.25) 20%,
+            rgba(255,255,255,0.08) 40%,
+            rgba(255,255,255,0) 60%);
+    transform: translate(-20%, -20%) scale(0.6);
+    opacity: 0;
+    filter: blur(8px);
+    pointer-events: none;
+    transition: transform .8s ease, opacity .6s ease;
+}
+
+.indicaciones:hover::before {
+    transform: translate(10%, 10%) scale(1.05);
+    opacity: .9;
+}
+

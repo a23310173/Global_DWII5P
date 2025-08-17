@@ -68,6 +68,7 @@ body.nav-collapsed .hamburger {
     background: rgba(0,0,0,0.08);
     border: none;
     border-radius: 10px;
+    z-index: 999;
 }
 body.nav-collapsed.nav-open .menu {
     display: block;
@@ -78,6 +79,7 @@ body.nav-collapsed.nav-open .menu {
     border-radius: 12px;
     box-shadow: 0 10px 30px rgba(0,0,0,.25);
     padding: 10px;
+    z-index: 9999;
 }
 body.nav-collapsed.nav-open .menu ul {
     display: flex;
